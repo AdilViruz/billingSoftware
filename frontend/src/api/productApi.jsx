@@ -7,8 +7,8 @@ const token = getToken();
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://backend-server-ksn.onrender.com/api/product/",
-    baseUrl: "http://localhost:8000/api/product/",
+    baseUrl: "https://backend-server-ksn.onrender.com/api/product/",
+    // baseUrl: "http://localhost:8000/api/product/",
     prepareHeaders: (headers, { getState }) => {
       const access_token = !token ? getState().auth.token : token;
       if (!headers.has("Authorization") && access_token) {
