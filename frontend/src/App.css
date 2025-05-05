@@ -1,0 +1,266 @@
+.form-container {
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.header-container {
+  border-bottom: 1px solid silver;
+}
+.nav-container {
+  height: 100vh;
+  max-width: 195px;
+  border: 1px solid silver;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 8px 5px;
+  margin: 5px 4px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+li a svg {
+  margin-right: 5px;
+}
+
+.nav-container ul li a:hover {
+  color: #2553a6;
+}
+
+.active-link {
+  background: #ebedf1;
+  color: hsl(219, 64%, 40%) !important;
+}
+
+.main-content-container {
+  height: calc(100vh - 132px);
+  /* background: #f5f5fb; */
+  overflow-y: auto;
+}
+.list-container {
+  height: calc(100vh - 75px);
+  overflow-y: auto;
+}
+
+.main-content {
+  margin: 0px 24px;
+  padding: 13px;
+  height: 100%;
+}
+
+.product-heading {
+  border-bottom: 1px solid silver;
+}
+.product-fields-container {
+  width: 99%;
+  border-radius: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.add-product-btn-container {
+  position: absolute;
+  padding: 10px 40px;
+  bottom: 0;
+  right: 0;
+  left: 194px;
+  background: #fff;
+  border: 1px solid silver;
+}
+
+.btn-bg {
+  background: #2553a6;
+  color: #fff;
+}
+.btn-bg:hover {
+  border: 1px solid #2553a6;
+  background: #fff;
+  color: #2553a6;
+}
+
+svg {
+  cursor: pointer;
+}
+.table-container th {
+  text-align: center;
+}
+.table-container td {
+  text-align: center;
+}
+.table-container tr {
+  border: 1px solid black;
+}
+.table-container span {
+  margin: 0 10px;
+}
+.field-error {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.branch-container {
+  height: calc(100vh - 65px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .branch{
+  
+} */
+.branch-link {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  align-self: flex-start;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 20px;
+  padding: 20px 50px;
+  border-bottom: 5px solid #2553a6;
+  border-radius: 10px;
+}
+.branch-link img {
+  height: 250px;
+  width: 250px;
+}
+.alert-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* position: relative; */
+  /* z-index: 255; */
+}
+.alert {
+  position: absolute;
+  top: 0;
+  /* left: 100px; */
+  z-index: 255;
+}
+.alert-msg {
+  background: #d32f2f;
+  opacity: 0.9;
+  color: #fff;
+  padding: 10px;
+  min-width: 300px;
+  max-width: 600px;
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
+  /* opacity: 0.8; */
+}
+.info-msg {
+  background: #0288d1;
+  opacity: 0.9;
+  color: #fff;
+  padding: 10px;
+  min-width: 300px;
+  max-width: 600px;
+  border-radius: 10px;
+  font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
+}
+.buyer-info {
+  margin: 10px;
+  border-radius: 6px;
+  background: rgb(246, 246, 246);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.invoice-container img {
+  width: 150px;
+}
+.seller-info {
+  width: 300px;
+}
+.invoice-table thead tr th {
+  text-align: center;
+  border: 1px solid black;
+}
+.invoice-table thead tr td {
+  border: 1px solid black;
+}
+
+.invoice-ksn tbody td {
+  border: 1px solid black;
+}
+.invoice-table tbody td {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+.invoice-table tbody tr:nth-child(13),
+.invoice-table tbody tr:nth-child(14) {
+  border: 1px solid black;
+}
+.invoice-table tbody tr:last-child {
+  border: 1px solid black;
+}
+.invoice-table td div,
+.invoice-table td dt {
+  font-size: 14px;
+}
+.invoice-table td dd {
+  font-size: 10px;
+}
+.invoice-table-footer tfoot tr td {
+  border: 1px solid black;
+}
+
+.extra-space td {
+  height: 400px;
+}
+
+.dashboard-card {
+  flex: auto;
+  border: 1px solid silver;
+  border-radius: 8px;
+  margin: 10px;
+  color: #fff;
+  /* color: hsl(219, 64%, 40%); */
+  box-shadow: 2px 5px 5px grey;
+}
+
+.dashboard-text {
+  flex: auto;
+  border: 1px solid silver;
+  border-radius: 8px;
+  margin: 10px;
+  color: #fff;
+  /* color: hsl(219, 64%, 40%); */
+  color: #000;
+}
+
+.amount-card {
+  background: #fff;
+  color: rgb(143, 141, 141);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: silver;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: rgb(127, 126, 126);
+  border-radius: 10px;
+}
+.navbar-link {
+  height: calc(100vh - 195px);
+  overflow-y: auto;
+}
+.payment-last-row {
+  background: rgb(247, 247, 136);
+}
