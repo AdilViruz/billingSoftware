@@ -5,11 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToWords } from "to-words";
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 import Spinner from "react-bootstrap/esm/Spinner";
 import moment from "moment";
-
 
 function InvoiceModal(props) {
   const { branch } = useParams();
@@ -121,21 +120,17 @@ function InvoiceModal(props) {
               <div className="d-flex justify-content-between">
                 <div className="align-self-center w-25">
                   {branch == "branch-1" ? (
-                    <img
-                      src="/images/Alizba_logo.png "
-                      className="w-75"
-                      alt=""
-                    />
+                    <img src="/images/Alizba_logo.png " alt="" />
                   ) : (
                     <img src="/images/logo2.png" alt="" />
                   )}
                 </div>
-                <div className="text-center seller-info ">
+                <div className="text-center seller-info w-50">
                   <div>{props.heading}</div>
                   <div className="fw-bold fs-4">
                     {branch == "branch-1"
-                      ? "Alizba Wood Furnitures"
-                      : "KSN Furnitures"}
+                      ? "ALIZBA WOOD FURNITURE"
+                      : "KSN FURNITURE"}
                   </div>
                   <div style={{ fontSize: 14 }}>
                     H.NO.2465/D/1 EKTA NAGAR, SHIV NAGAR WANJRA LAYOUT,
@@ -143,7 +138,13 @@ function InvoiceModal(props) {
                   </div>
                   <div className="fw-bold">GSTIN/UIN: 27CJDPM0861R1ZN</div>
                 </div>
-                <div>ORIGINAL FOR RECIPIENT</div>
+                <div className="align-self-center w-25">
+                  {branch == "branch-1" ? (
+                    <img src="/images/Alizba_logo.png " alt="" />
+                  ) : (
+                    <img src="/images/logo2.png" alt="" />
+                  )}
+                </div>
               </div>
               <table
                 className={` ${
@@ -153,50 +154,129 @@ function InvoiceModal(props) {
                 }  `}
               >
                 <thead>
-                  <tr>
-                    <td colSpan={8} className="text-center  fw-bold">
-                      MAHARASHTRA
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={4}>
-                      <div className="fw-bold">{`Customer's Details`}</div>
-                      <div className="fw-bold">NAME: {billDetails?.name}</div>
-                      <div className="fw-bold">
-                        ADRESS: {billDetails?.address}
-                      </div>
-                      <div className="fw-bold">STATE: {billDetails?.state}</div>
-                      <div className="fw-bold">
-                        {billDetails?.gst_number &&
-                          `GSTIN: ${billDetails?.gst_number}`}
-                      </div>
-                      <div className="fw-bold">
-                        {billDetails?.ure_number &&
-                          `URP/PAN No.: ${billDetails?.ure_number}`}
-                      </div>
-                    </td>
-                    <td colSpan={4} className="">
-                      <div className="fw-bold">
-                        Invoice No.: INV-{billDetails?.invoice_number}
-                      </div>
-                      <div className="fw-bold">
-                        Date: {moment(billDetails?.date).format("ll")}
-                      </div>
-                      <div className="fw-bold">Terms of Delivery: TERMS</div>
-                      <div className="fw-bold">
-                        Payment Mode: {billDetails?.payment_mode}
-                      </div>
+                  {branch == "branch-1" ? (
+                    <></>
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={8}
+                        className="text-center  fw-bold bg-primary"
+                      >
+                        MAHARASHTRA
+                      </td>
+                    </tr>
+                  )}
 
-                      {/* <div>Mode of Payment: Credit</div> */}
-                    </td>
-                  </tr>
-                  <tr className="">
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td colSpan={2}>
+                        <div className="fw-bold">
+                          Bill to: <br /> {billDetails?.name}
+                        </div>
+                        <div>{billDetails?.address}</div>
+                        <div>{billDetails?.state}</div>
+
+                        <div className="fw-bold">
+                          {billDetails?.ure_number &&
+                            `URP/PAN No.: ${billDetails?.ure_number}`}
+                        </div>
+                      </td>
+
+                      <td colSpan={2}>
+                        <div className="fw-bold">
+                          Place of Supply: <br /> {billDetails?.name}
+                        </div>
+                        <div>{billDetails?.address}</div>
+                      </td>
+                      <td>
+                        <div className="fw-bold">Invoice No:</div>
+                      </td>
+                      <td>
+                        <div className="fw-bold">
+                          INV-{billDetails?.invoice_number}
+                        </div>
+                      </td>
+                      <td colSpan={3} className="">
+                        <div className="fw-bold">
+                          Date: {moment(billDetails?.date).format("ll")}
+                        </div>
+                        <div className="fw-bold">Terms of Delivery: TERMS</div>
+
+                        {/* <div>Mode of Payment: Credit</div> */}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className="fw-bold">{`Customer's Details`}</div>
+                        <div className="fw-bold">NAME: {billDetails?.name}</div>
+                        <div className="fw-bold">
+                          ADRESS: {billDetails?.address}
+                        </div>
+                        <div className="fw-bold">
+                          STATE: {billDetails?.state}
+                        </div>
+                        <div className="fw-bold">
+                          {billDetails?.gst_number &&
+                            `GSTIN: ${billDetails?.gst_number}`}
+                        </div>
+                        <div className="fw-bold">
+                          {billDetails?.ure_number &&
+                            `URP/PAN No.: ${billDetails?.ure_number}`}
+                        </div>
+                      </td>
+                      <td colSpan={4} className="">
+                        <div className="fw-bold">
+                          Invoice No.: INV-{billDetails?.invoice_number}
+                        </div>
+                        <div className="fw-bold">
+                          Date: {moment(billDetails?.date).format("ll")}
+                        </div>
+                        <div className="fw-bold">Terms of Delivery: TERMS</div>
+                        <div className="fw-bold">
+                          Payment Mode: {billDetails?.payment_mode}
+                        </div>
+
+                        {/* <div>Mode of Payment: Credit</div> */}
+                      </td>
+                    </tr>
+                  )}
+
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td>
+                        <div className="fw-bold">
+                          {billDetails?.gst_number && `GSTIN:`}
+                        </div>
+                      </td>
+                      <div className="fw-bold">
+                        {billDetails?.gst_number && billDetails?.gst_number}
+                      </div>
+                      <td>
+                        <div className="fw-bold">Payment Mode:</div>
+                      </td>
+                      <td>
+                        <div className="fw-bold">
+                          {billDetails?.payment_mode}
+                        </div>
+                      </td>
+                      <td colSpan={2}>
+                        <div className="fw-bold">Sales Type :</div>
+                      </td>
+                      <td colSpan={2}>
+                        <div className="fw-bold">State Sale</div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <></>
+                  )}
+                  <tr className={branch != "branch-1" ? "bg-primary" : ""}>
                     <th>Sr No.</th>
                     <th>Item Description</th>
                     {props.heading.includes("INVOICE") && <th>HSN Code</th>}
                     <th>Qty</th>
                     <th>Rate</th>
-                    <th>Per</th>
+                    <th>Units</th>
                     {billDetails?.gst_number || billDetails?.ure_number ? (
                       <th>Tax Rate</th>
                     ) : null}
@@ -242,154 +322,362 @@ function InvoiceModal(props) {
                       </tr>
                     ))}
 
-                  <tr>
-                    <td colSpan={4}>
-                      <div className="fw-bold ">Amount in Words:</div>
-                      <div className="text-center fw-bold">
-                        {billDetails &&
-                          toWords.convert(
-                            billDetails?.products?.reduce(
-                              (acc, curr) => (acc += curr.qty * curr.price),
-                              0
-                            )
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td colSpan={4}>
+                        <div className="fw-bold ">TOTAL :</div>
+                      </td>
+
+                      <td colSpan={4}>
+                        <div className="text-end fw-bold">
+                          {billDetails?.products?.reduce(
+                            (acc, curr) =>
+                              (acc +=
+                                curr.qty * curr.price -
+                                curr.qty * curr.price * 0.18),
+                            0
                           )}
-                      </div>
-                    </td>
-                    <td colSpan={4} rowSpan={2} className="align-text-top">
-                      {billDetails?.gst_number || billDetails?.ure_number ? (
-                        <div>
-                          <div className="d-flex justify-content-between ">
-                            <div className="fw-bold">AMOUNT BEFORE TAX</div>
-                            <div className="fw-bold ">
-                              {billDetails?.products?.reduce(
-                                (acc, curr) =>
-                                  (acc +=
-                                    curr.qty * curr.price -
-                                    curr.qty * curr.price * 0.18),
-                                0
-                              )}
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <></>
+                  )}
+
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td colSpan={4}>
+                        <dl>
+                          <dt>Terms & Condition:</dt>
+                          <dd>
+                            INTREST WILL BE CHARGED AT 24% ANNUM IF THE BILL IS
+                            NOT PAID <br />
+                            WHITHIN 15 DAYS. <br />
+                            WE DECLARE THAT THIS INVOICE SHOWS THE ACTUAL PRICE
+                            OF THE <br />
+                            GOODS DESCRIBED AND THAT PARTICULARS ARE TRUE AND
+                            CORRECT <br />
+                            Subject to NAGPUR Juridiction
+                          </dd>
+                        </dl>
+                      </td>
+                      <td colSpan={5} className="align-text-top m-0">
+                        {billDetails?.gst_number || billDetails?.ure_number ? (
+                          <div>
+                            <div className="d-flex justify-content-between ">
+                              <div className="fw-bold">
+                                TOTAL AMOUNT BEFORE TAX
+                              </div>
+                              <div className="fw-bold ">
+                                {billDetails?.products?.reduce(
+                                  (acc, curr) =>
+                                    (acc +=
+                                      curr.qty * curr.price -
+                                      curr.qty * curr.price * 0.18),
+                                  0
+                                )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">CGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state == "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.09),
+                                    0
+                                  )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">SGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state == "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.09),
+                                    0
+                                  )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">IGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state != "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.18),
+                                    0
+                                  )}
+                              </div>
                             </div>
                           </div>
-                          <div className="d-flex justify-content-between">
-                            <div className="fw-bold">CGST</div>
-                            <div className="fw-bold">
-                              {billDetails?.state == "Maharashtra" &&
+                        ) : null}
+                        <div className="d-flex justify-content-between border border-dark ">
+                          <div className="fw-bold">TOTAL TAX AMOUNT</div>
+                          <div className="fw-bold ">
+                            {billDetails?.state == "Maharashtra"
+                              ? billDetails?.products?.reduce(
+                                  (acc, curr) =>
+                                    (acc += curr.qty * curr.price * 0.09),
+                                  0
+                                ) +
                                 billDetails?.products?.reduce(
                                   (acc, curr) =>
                                     (acc += curr.qty * curr.price * 0.09),
                                   0
-                                )}
-                            </div>
-                          </div>
-                          <div className="d-flex justify-content-between">
-                            <div className="fw-bold">SGST</div>
-                            <div className="fw-bold">
-                              {billDetails?.state == "Maharashtra" &&
-                                billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                    (acc += curr.qty * curr.price * 0.09),
-                                  0
-                                )}
-                            </div>
-                          </div>
-                          <div className="d-flex justify-content-between">
-                            <div className="fw-bold">IGST</div>
-                            <div className="fw-bold">
-                              {billDetails?.state != "Maharashtra" &&
-                                billDetails?.products?.reduce(
+                                )
+                              : billDetails?.products?.reduce(
                                   (acc, curr) =>
                                     (acc += curr.qty * curr.price * 0.18),
                                   0
                                 )}
-                            </div>
                           </div>
                         </div>
-                      ) : null}
-                      <div className="d-flex justify-content-between border border-dark ">
-                        <div className="fw-bold">GRAND TOTAL</div>
-                        <div className="fw-bold ">
-                          {billDetails?.products?.reduce(
-                            (acc, curr) => (acc += curr.qty * curr.price),
-                            0
-                          )}
+                        <div className="d-flex justify-content-between border border-dark ">
+                          <div className="fw-bold">TOTAL AMOUNT AFTER TAX</div>
+                          <div className="fw-bold ">
+                            {billDetails?.products?.reduce(
+                              (acc, curr) => (acc += curr.qty * curr.price),
+                              0
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      {props.heading?.includes("INVOICE") && (
-                        <div>
-                          <div className="d-flex justify-content-between border border-dark bg-success">
-                            <div className="fw-bold">PAID AMOUNT</div>
-                            <div className="fw-bold ">
-                              {billDetails?.paid_amount}
+                        {props.heading?.includes("INVOICE") && (
+                          <div>
+                            <div className="d-flex justify-content-between border border-dark ">
+                              <div className="fw-bold">PAID AMOUNT</div>
+                              <div className="fw-bold ">
+                                {billDetails?.paid_amount}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between border border-dark">
+                              <div className="fw-bold">BALANCE AMOUNT</div>
+                              <div className="fw-bold ">
+                                {billDetails?.products?.reduce(
+                                  (acc, curr) => (acc += curr.qty * curr.price),
+                                  0
+                                ) - billDetails?.paid_amount}
+                              </div>
                             </div>
                           </div>
-                          <div className="d-flex justify-content-between border border-dark bg-warning">
-                            <div className="fw-bold">BALANCE AMOUNT</div>
-                            <div className="fw-bold ">
-                              {billDetails?.products?.reduce(
+                        )}
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td colSpan={4}>
+                        <div className="fw-bold ">Amount in Words:</div>
+                        <div className="text-center fw-bold">
+                          {billDetails &&
+                            toWords.convert(
+                              billDetails?.products?.reduce(
                                 (acc, curr) => (acc += curr.qty * curr.price),
                                 0
-                              ) - billDetails?.paid_amount}
+                              )
+                            )}
+                        </div>
+                      </td>
+                      <td colSpan={4} rowSpan={2} className="align-text-top">
+                        {billDetails?.gst_number || billDetails?.ure_number ? (
+                          <div>
+                            <div className="d-flex justify-content-between ">
+                              <div className="fw-bold">AMOUNT BEFORE TAX</div>
+                              <div className="fw-bold ">
+                                {billDetails?.products?.reduce(
+                                  (acc, curr) =>
+                                    (acc +=
+                                      curr.qty * curr.price -
+                                      curr.qty * curr.price * 0.18),
+                                  0
+                                )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">CGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state == "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.09),
+                                    0
+                                  )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">SGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state == "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.09),
+                                    0
+                                  )}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                              <div className="fw-bold">IGST</div>
+                              <div className="fw-bold">
+                                {billDetails?.state != "Maharashtra" &&
+                                  billDetails?.products?.reduce(
+                                    (acc, curr) =>
+                                      (acc += curr.qty * curr.price * 0.18),
+                                    0
+                                  )}
+                              </div>
                             </div>
                           </div>
+                        ) : null}
+                        <div className="d-flex justify-content-between border border-dark  bg-primary">
+                          <div className="fw-bold">GRAND TOTAL</div>
+                          <div className="fw-bold ">
+                            {billDetails?.products?.reduce(
+                              (acc, curr) => (acc += curr.qty * curr.price),
+                              0
+                            )}
+                          </div>
                         </div>
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={4}>
-                      <div className="fw-bold">BANK DETAILS:</div>
-                      <div className="fw-bold">
-                        NAME OF BANK :{" "}
-                        {branch === "branch-1"
-                          ? "CANARA BANK"
-                          : "BANK OF BARODA"}
-                      </div>
-                      <div className="fw-bold">
-                        A/C NUMBER :{" "}
-                        {branch === "branch-1"
-                          ? "125002249656"
-                          : "76420500000608"}
-                      </div>
-                      <div className="fw-bold">
-                        IFSC CODE :{" "}
-                        {branch === "branch-1" ? "CNRB0015267" : "BARB0VJNAMN"}
-                      </div>
-                      <div className="fw-bold">
-                        {branch === "branch-1"
-                          ? "BRANCH : KAMPTEE"
-                          : "BANK DETAILS: MOHAN NAGER"}
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={4}>
-                      <dl>
-                        <dt>Terms & Condition:</dt>
-                        <dd>
-                          INTREST WILL BE CHARGED AT 24% ANNUM IF THE BILL IS
-                          NOT PAID <br />
-                          WHITHIN 15 DAYS. <br />
-                          WE DECLARE THAT THIS INVOICE SHOWS THE ACTUAL PRICE OF
-                          THE <br />
-                          GOODS DESCRIBED AND THAT PARTICULARS ARE TRUE AND
-                          CORRECT <br />
-                          Subject to NAGPUR Juridiction
-                        </dd>
-                      </dl>
-                    </td>
-                    <td
-                      colSpan={4}
-                      className="align-bottom text-center fw-bold"
-                    >
-                      Authorised Signature
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={8} className="text-center">
-                      {" "}
-                      <div>This is computer generated invoice</div>
-                    </td>
-                  </tr>
+                        {props.heading?.includes("INVOICE") && (
+                          <div>
+                            <div className="d-flex justify-content-between border border-dark">
+                              <div className="fw-bold">PAID AMOUNT</div>
+                              <div className="fw-bold ">
+                                {billDetails?.paid_amount}
+                              </div>
+                            </div>
+                            <div className="d-flex justify-content-between border border-dark ">
+                              <div className="fw-bold">BALANCE AMOUNT</div>
+                              <div className="fw-bold ">
+                                {billDetails?.products?.reduce(
+                                  (acc, curr) => (acc += curr.qty * curr.price),
+                                  0
+                                ) - billDetails?.paid_amount}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  )}
+
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td colSpan={4}>
+                        <div className="fw-bold">BANK DETAILS:</div>
+                        <div className="fw-bold">
+                          NAME OF BANK :{" "}
+                          {branch === "branch-1"
+                            ? "CANARA BANK"
+                            : "BANK OF BARODA"}
+                        </div>
+                        <div className="fw-bold">
+                          A/C NUMBER :{" "}
+                          {branch === "branch-1"
+                            ? "125002249656"
+                            : "76420500000608"}
+                        </div>
+                        <div className="fw-bold">
+                          IFSC CODE :{" "}
+                          {branch === "branch-1"
+                            ? "CNRB0015267"
+                            : "BARB0VJNAMN"}
+                        </div>
+                        <div className="fw-bold">
+                          {branch === "branch-1"
+                            ? "BRANCH : KAMPTEE"
+                            : "BANK DETAILS: MOHAN NAGER"}
+                        </div>
+                      </td>
+                      <td
+                        colSpan={5}
+                        className="align-bottom text-center fw-bold"
+                      >
+                        <div className="display-6">Alizba Wood Furniture</div>
+                        <div className="display-6">Authorised Signatory</div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td colSpan={4}>
+                        <div className="fw-bold">BANK DETAILS:</div>
+                        <div className="fw-bold">
+                          NAME OF BANK :{" "}
+                          {branch === "branch-1"
+                            ? "CANARA BANK"
+                            : "BANK OF BARODA"}
+                        </div>
+                        <div className="fw-bold">
+                          A/C NUMBER :{" "}
+                          {branch === "branch-1"
+                            ? "125002249656"
+                            : "76420500000608"}
+                        </div>
+                        <div className="fw-bold">
+                          IFSC CODE :{" "}
+                          {branch === "branch-1"
+                            ? "CNRB0015267"
+                            : "BARB0VJNAMN"}
+                        </div>
+                        <div className="fw-bold">
+                          {branch === "branch-1"
+                            ? "BRANCH : KAMPTEE"
+                            : "BANK DETAILS: MOHAN NAGER"}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+
+                  {branch == "branch-1" ? (
+                    <></>
+                  ) : (
+                    <tr>
+                      <td colSpan={4}>
+                        <dl>
+                          <dt>Terms & Condition:</dt>
+                          <dd>
+                            INTREST WILL BE CHARGED AT 24% ANNUM IF THE BILL IS
+                            NOT PAID <br />
+                            WHITHIN 15 DAYS. <br />
+                            WE DECLARE THAT THIS INVOICE SHOWS THE ACTUAL PRICE
+                            OF THE <br />
+                            GOODS DESCRIBED AND THAT PARTICULARS ARE TRUE AND
+                            CORRECT <br />
+                            Subject to NAGPUR Juridiction
+                          </dd>
+                        </dl>
+                      </td>
+                      <td
+                        colSpan={4}
+                        className="align-bottom text-center fw-bold"
+                      >
+                        Authorised Signature
+                      </td>
+                    </tr>
+                  )}
+
+                  {branch == "branch-1" ? (
+                    <tr>
+                      <td colSpan={8}>
+                        <div className="text-center fw-bold">
+                          Amount in Words:{" "}
+                          {billDetails &&
+                            toWords.convert(
+                              billDetails?.products?.reduce(
+                                (acc, curr) => (acc += curr.qty * curr.price),
+                                0
+                              )
+                            )}
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr>
+                      <td colSpan={8} className="text-center">
+                        {" "}
+                        <div>This is computer generated invoice</div>
+                      </td>
+                    </tr>
+                  )}
 
                   {/* =======
                   {emptyRowArr.slice(billDetails?.products?.length).map((item)=>
