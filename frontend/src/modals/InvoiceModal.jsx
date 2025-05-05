@@ -5,11 +5,20 @@ import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToWords } from "to-words";
+<<<<<<< HEAD
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import Spinner from "react-bootstrap/esm/Spinner";
 import moment from "moment";
 
+=======
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import Spinner from "react-bootstrap/esm/Spinner";
+import moment from "moment";
+
+
+>>>>>>> 2a42ebc4bbb5e92a78fa1a67aac537b53754975e
 function InvoiceModal(props) {
   const { branch } = useParams();
 

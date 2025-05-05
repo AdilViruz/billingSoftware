@@ -124,17 +124,6 @@ function InvoiceListGenerate({
               <Spinner size="lg" className="text-center" />
             </div>
           )}
-          {/* {data?.invoiceDetails?.filter((item) =>
-            pathname.includes("plain")
-              ? item.gst_number == "" && item.ure_number == ""
-              : item.isGstRegistered | (item.gst_number != "")
-          )?.length < 1 && <div className="text-center">No Data</div>}
-          {pathname.includes("quotation") &&
-          data?.QuotationDetails?.length == 0 ? (
-            <div className="text-center">No Data</div>
-          ) : (
-            ""
-          )} */}
           {data?.invoiceDetails?.filter((item) => item.isGenerated)?.length <
             1 && <div className="text-center">No Data</div>}
         </div>
