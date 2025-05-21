@@ -181,21 +181,26 @@ function InvoiceModal(props) {
                             `URP/PAN No.: ${billDetails?.ure_number}`}
                         </div>
                       </td>
-
                       <td colSpan={2}>
                         <div className="fw-bold">
                           Place of Supply: <br /> {billDetails?.name}
                         </div>
                         <div>{billDetails?.address}</div>
                       </td>
-                      <td>
-                        <div className="fw-bold">Invoice No:</div>
-                      </td>
-                      <td>
-                        <div className="fw-bold">
-                          INV-{billDetails?.invoice_number}
-                        </div>
-                      </td>
+                      {props.heading.includes("INVOICE") && (
+                        <td>
+                          <div className="fw-bold">Invoice No:</div>
+                        </td>
+                      )}
+
+                      {props.heading.includes("INVOICE") && (
+                        <td>
+                          <div className="fw-bold">
+                            INV-{billDetails?.invoice_number}
+                          </div>
+                        </td>
+                      )}
+
                       <td colSpan={3} className="">
                         <div className="fw-bold">
                           Date: {moment(billDetails?.date).format("ll")}
@@ -211,7 +216,7 @@ function InvoiceModal(props) {
                         <div className="fw-bold">{`Customer's Details`}</div>
                         <div className="fw-bold">NAME: {billDetails?.name}</div>
                         <div className="fw-bold">
-                          ADRESS: {billDetails?.address}
+                          ADDRESS: {billDetails?.address}
                         </div>
                         <div className="fw-bold">
                           STATE: {billDetails?.state}
@@ -260,12 +265,20 @@ function InvoiceModal(props) {
                           {billDetails?.payment_mode}
                         </div>
                       </td>
-                      <td colSpan={2}>
-                        <div className="fw-bold">Sales Type :</div>
-                      </td>
-                      <td colSpan={2}>
-                        <div className="fw-bold">State Sale</div>
-                      </td>
+
+                      {props.heading.includes("INVOICE") ? (
+                        <td colSpan={2}>
+                          <div className="fw-bold">Sales Type :</div>
+                        </td>
+                      ) : (
+                        <td colSpan={2}></td>
+                      )}
+
+                      {props.heading.includes("INVOICE") && (
+                        <td colSpan={2}>
+                          <div className="fw-bold">State Sale</div>
+                        </td>
+                      )}
                     </tr>
                   ) : (
                     <></>
@@ -315,7 +328,9 @@ function InvoiceModal(props) {
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+
+                        {props.heading.includes("INVOICE") && <td></td>}
+
                         {billDetails?.gst_number || billDetails?.ure_number ? (
                           <td></td>
                         ) : null}

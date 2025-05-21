@@ -47,7 +47,7 @@ function QuotationPage() {
         editpath={`/edit-quotation/${branch}`}
       />
       <InvoiceModal
-        heading="QUATATION"
+        heading="QUOTATION"
         show={show}
         onHide={() => setShow(false)}
         data={quotationData}
