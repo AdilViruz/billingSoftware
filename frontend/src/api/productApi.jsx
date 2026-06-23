@@ -2,7 +2,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getToken } from "../utils/localStorage";
 
-const token = getToken();
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({
   reducerPath: "productApi",
@@ -10,7 +9,8 @@ export const productApi = createApi({
     baseUrl: "https://backend-server-ksn.onrender.com/api/product/",
     // baseUrl: "http://localhost:8000/api/product/",
     prepareHeaders: (headers, { getState }) => {
-      const access_token = !token ? getState().auth.token : token;
+      const currentToken = getToken();
+      const access_token = currentToken ? currentToken : getState().auth.token;
       if (!headers.has("Authorization") && access_token) {
         headers.set("Authorization", `${access_token}`);
       }

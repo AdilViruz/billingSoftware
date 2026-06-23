@@ -1,12 +1,17 @@
 
 
- const setToken = (token)=> localStorage.setItem('token',JSON.stringify(token))
- 
- const getToken =()=>{
-  const token = localStorage.getItem('token')
-  return JSON.parse(token)
- }
+const setToken = (token) => localStorage.setItem('token', JSON.stringify(token))
 
- const clearToken= ()=> localStorage.clear('token')
+const getToken = () => {
+    const token = localStorage.getItem('token')
+    if (!token) return null;
+    try {
+        return JSON.parse(token)
+    } catch (e) {
+        return token;
+    }
+}
 
- export{setToken,getToken,clearToken}
+const clearToken = () => localStorage.removeItem('token')
+
+export { setToken, getToken, clearToken }
