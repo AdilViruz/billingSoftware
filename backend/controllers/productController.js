@@ -127,7 +127,7 @@ class ProductController {
   static buildProducts = async (req, res) => {
     const { branch } = req.params;
     try {
-      const products = await BuildProductModel.find({ branch });
+      const products = await BuildProductModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Build products fetched successfully",
@@ -287,7 +287,7 @@ class ProductController {
   static SoldProducts = async (req, res) => {
     const { branch } = req.params;
     try {
-      const products = await SoldProductModel.find({ branch });
+      const products = await SoldProductModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Sold products fetched successfully",
@@ -510,7 +510,7 @@ class ProductController {
   static rawMaterials = async (req, res) => {
     const { branch } = req.params;
     try {
-      const products = await RawMaterialModel.find({ branch });
+      const products = await RawMaterialModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Raw materials fetched successfully",
@@ -612,10 +612,10 @@ class ProductController {
   static Dashboard = async (req, res) => {
     const { branch } = req.params;
     try {
-      const buildProducts = await BuildProductModel.find({ branch });
-      const soldProducts = await SoldProductModel.find({ branch });
-      const rowMaterials = await RawMaterialModel.find({ branch });
-      const billing = await BillingModel.find({ branch });
+      const buildProducts = await BuildProductModel.find({ branch }).sort({ _id: -1 });
+      const soldProducts = await SoldProductModel.find({ branch }).sort({ _id: -1 });
+      const rowMaterials = await RawMaterialModel.find({ branch }).sort({ _id: -1 });
+      const billing = await BillingModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Build products fetched successfully",

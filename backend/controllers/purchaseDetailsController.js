@@ -41,7 +41,7 @@ class purchaseDetailsController {
   static purchaseDetails = async (req, res) => {
     const { branch } = req.params;
     try {
-      const purchases = await PurchaseModel.find({ branch });
+      const purchases = await PurchaseModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Purchase details fetched successfully",

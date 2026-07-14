@@ -51,6 +51,7 @@ function AddInvoice({
     isGstRegistered: billDetails?.isGstRegistered,
     products: billDetails?.products,
     date: billDetails?.date,
+    invoice_number: billDetails?.invoice_number,
   };
   const initialValues = {
     branch,
@@ -68,6 +69,7 @@ function AddInvoice({
     isGstRegistered: false,
     isGenerated: false,
     date: Date.now,
+    invoice_number: "",
     products: [
       {
         branch: branch,
@@ -409,7 +411,25 @@ function AddInvoice({
 
               {heading?.includes("Invoice") && (
                 <div className=" col-4">
-                  <label htmlFor="name" className="form-label">
+                  <label htmlFor="invoice_number" className="form-label">
+                    Invoice Number
+                  </label>
+                  <input
+                    type="number"
+                    name="invoice_number"
+                    value={formik.values.invoice_number}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="form-control"
+                    id="invoice_number"
+                    placeholder="Enter invoice number"
+                  />
+                </div>
+              )}
+
+              {heading?.includes("Invoice") && (
+                <div className=" col-4">
+                  <label htmlFor="date" className="form-label">
                     Date
                   </label>
                   <input

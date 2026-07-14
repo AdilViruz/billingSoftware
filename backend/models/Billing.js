@@ -24,9 +24,7 @@ const billingSchema = new mongoose.Schema({
   show_invoice: { type: Boolean, default: true },
 });
 
-billingSchema.path("invoice_number").default(() => {
-  return Math.floor(1000 + Math.random() * 9000);
-});
+// invoice_number is now manually entered by the user
 // Model
 const BillingModel = mongoose.model("billing", billingSchema);
 

@@ -44,7 +44,7 @@ class quotationController {
 static getQuotation = async (req, res) => {
     const { branch } = req.params;
     try {
-      const QuotationDetails = await quotationModel.find({ branch });
+      const QuotationDetails = await quotationModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Quotation fetched successfully",

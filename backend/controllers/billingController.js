@@ -77,7 +77,7 @@ class BillingController {
   static getBilling = async (req, res) => {
     const { branch } = req.params;
     try {
-      const invoiceDetails = await BillingModel.find({ branch });
+      const invoiceDetails = await BillingModel.find({ branch }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Billing fetched successfully",
@@ -94,7 +94,7 @@ class BillingController {
   static singleBilling = async (req, res) => {
     const { branch, id } = req.params;
     try {
-      const bill = await BillingModel.find({ branch, _id: id });
+      const bill = await BillingModel.find({ branch, _id: id }).sort({ _id: -1 });
       res.status(201).json({
         status: "success",
         message: "Bill fetched successfully",
