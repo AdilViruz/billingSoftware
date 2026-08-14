@@ -89,7 +89,7 @@ function PaymentHistory({ title, data, path, isLoading }) {
                           item.gst_number !== "" || item.ure_number !== ""
                       )
                       ?.map((item) => item.products)
-                      ?.flat(1)?.filter((item)=> item.product_name == "no_product").length}{" "}
+                      ?.flat(1)?.filter((item) => item.product_name == "no_product").length}{" "}
                   Rs
                 </td>
                 <td></td>

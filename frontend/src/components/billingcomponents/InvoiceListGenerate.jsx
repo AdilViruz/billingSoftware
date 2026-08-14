@@ -48,7 +48,7 @@ function InvoiceListGenerate({
         <div className="my-3  d-flex justify-content-between ">
           <div className="w-25">
             <label htmlFor="name" className="form-label">
-              Search by name
+              Search by name or invoice no.
             </label>
             <input
               type="text"
@@ -79,7 +79,8 @@ function InvoiceListGenerate({
               {data?.invoiceDetails
                 ?.filter((item) => item.isGenerated)
                 ?.filter((item) =>
-                  item.name?.toLowerCase().includes(serachValue?.toLowerCase())
+                  item.name?.toLowerCase().includes(serachValue?.toLowerCase()) ||
+                  item.invoice_number?.toString().toLowerCase().includes(serachValue?.toLowerCase())
                 )
                 ?.map((item, index) =>
                   item.show_invoice ? (

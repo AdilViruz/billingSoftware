@@ -48,7 +48,7 @@ function InvoiceList({
         <div className="my-3  d-flex justify-content-between ">
           <div className="w-25">
             <label htmlFor="name" className="form-label">
-              Search by name
+              {pathname.includes("quotation") ? "Search by name" : "Search by name or invoice no."}
             </label>
             <input
               type="text"
@@ -128,14 +128,13 @@ function InvoiceList({
                   ?.filter((item) =>
                     pathname.includes("plain")
                       ? item.gst_number == "" &&
-                        item.ure_number == "" &&
-                        !item.isGenerated
+                      item.ure_number == "" &&
+                      !item.isGenerated
                       : item.isGstRegistered | (item.gst_number != "")
                   )
                   ?.filter((item) =>
-                    item.name
-                      ?.toLowerCase()
-                      .includes(serachValue?.toLowerCase())
+                    item.name?.toLowerCase().includes(serachValue?.toLowerCase()) ||
+                    item.invoice_number?.toString().toLowerCase().includes(serachValue?.toLowerCase())
                   )
                   ?.map((item, index) =>
                     item.show_invoice ? (
@@ -187,7 +186,7 @@ function InvoiceList({
               : item.isGstRegistered | (item.gst_number != "")
           )?.length < 1 && <div className="text-center">No Data</div>}
           {pathname.includes("quotation") &&
-          data?.QuotationDetails?.length == 0 ? (
+            data?.QuotationDetails?.length == 0 ? (
             <div className="text-center">No Data</div>
           ) : (
             ""

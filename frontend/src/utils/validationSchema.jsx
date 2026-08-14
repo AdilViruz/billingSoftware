@@ -130,6 +130,8 @@ const billingSchema = Yup.object().shape({
       qty: Yup.string().required("Qty is required"),
     })
   ),
+  transporter_name: Yup.string(),
+  vehicle_number: Yup.string(),
 });
 const withoutGstBillingSchema = Yup.object().shape({
   name: Yup.string()
@@ -146,6 +148,8 @@ const withoutGstBillingSchema = Yup.object().shape({
       qty: Yup.string().required("Qty is required"),
     })
   ),
+  transporter_name: Yup.string(),
+  vehicle_number: Yup.string(),
 });
 
 const changePasswordSchema = Yup.object().shape({

@@ -52,6 +52,8 @@ function AddInvoice({
     products: billDetails?.products,
     date: billDetails?.date,
     invoice_number: billDetails?.invoice_number,
+    transporter_name: billDetails?.transporter_name,
+    vehicle_number: billDetails?.vehicle_number,
   };
   const initialValues = {
     branch,
@@ -70,6 +72,8 @@ function AddInvoice({
     isGenerated: false,
     date: Date.now,
     invoice_number: "",
+    transporter_name: "",
+    vehicle_number: "",
     products: [
       {
         branch: branch,
@@ -441,6 +445,40 @@ function AddInvoice({
                     className="form-control"
                     id="date"
                     placeholder="dd-mm-yyyy"
+                  />
+                </div>
+              )}
+              {heading?.includes("Invoice") && (
+                <div className=" col-4">
+                  <label htmlFor="transporter_name" className="form-label">
+                    Transporter Name
+                  </label>
+                  <input
+                    type="text"
+                    name="transporter_name"
+                    value={formik.values.transporter_name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="form-control"
+                    id="transporter_name"
+                    placeholder="Enter transporter name"
+                  />
+                </div>
+              )}
+              {heading?.includes("Invoice") && (
+                <div className=" col-4">
+                  <label htmlFor="vehicle_number" className="form-label">
+                    Vehicle Number
+                  </label>
+                  <input
+                    type="text"
+                    name="vehicle_number"
+                    value={formik.values.vehicle_number}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className="form-control"
+                    id="vehicle_number"
+                    placeholder="Enter vehicle number"
                   />
                 </div>
               )}

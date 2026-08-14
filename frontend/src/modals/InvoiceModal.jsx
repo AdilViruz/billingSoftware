@@ -147,11 +147,10 @@ function InvoiceModal(props) {
                 </div>
               </div>
               <table
-                className={` ${
-                  branch == "branch-2"
-                    ? "invoice-table invoice-ksn w-100 mt-3"
-                    : "invoice-table w-100 mt-3"
-                }  `}
+                className={` ${branch == "branch-2"
+                  ? "invoice-table invoice-ksn w-100 mt-3"
+                  : "invoice-table w-100 mt-3"
+                  }  `}
               >
                 <thead>
                   {branch == "branch-1" ? (
@@ -190,7 +189,10 @@ function InvoiceModal(props) {
                       {props.heading.includes("INVOICE") && (
                         <td>
                           <div className="fw-bold">Invoice No:</div>
+                          <div className="fw-bold">Date : </div>
                         </td>
+
+
                       )}
 
                       {props.heading.includes("INVOICE") && (
@@ -198,14 +200,21 @@ function InvoiceModal(props) {
                           <div className="fw-bold">
                             INV-{billDetails?.invoice_number}
                           </div>
+                          <div className="fw-bold">
+                            {moment(billDetails?.date).format("ll")}
+                          </div>
                         </td>
                       )}
 
                       <td colSpan={3} className="">
-                        <div className="fw-bold">
-                          Date: {moment(billDetails?.date).format("ll")}
-                        </div>
-                        <div className="fw-bold">Terms of Delivery: TERMS</div>
+
+
+                        {billDetails?.transporter_name && (
+                          <div className="fw-bold">Transporter: {billDetails?.transporter_name}</div>
+                        )}
+                        {billDetails?.vehicle_number && (
+                          <div className="fw-bold">Vehicle No: {billDetails?.vehicle_number}</div>
+                        )}
 
                         {/* <div>Mode of Payment: Credit</div> */}
                       </td>
@@ -237,7 +246,13 @@ function InvoiceModal(props) {
                         <div className="fw-bold">
                           Date: {moment(billDetails?.date).format("ll")}
                         </div>
-                        <div className="fw-bold">Terms of Delivery: TERMS</div>
+
+                        {billDetails?.transporter_name && (
+                          <div className="fw-bold">Transporter: {billDetails?.transporter_name}</div>
+                        )}
+                        {billDetails?.vehicle_number && (
+                          <div className="fw-bold">Vehicle No: {billDetails?.vehicle_number}</div>
+                        )}
                         <div className="fw-bold">
                           Payment Mode: {billDetails?.payment_mode}
                         </div>
@@ -347,9 +362,9 @@ function InvoiceModal(props) {
                         <div className="text-end fw-bold">
                           {billDetails?.products?.reduce(
                             (acc, curr) =>
-                              (acc +=
-                                curr.qty * curr.price -
-                                curr.qty * curr.price * 0.18),
+                            (acc +=
+                              curr.qty * curr.price -
+                              curr.qty * curr.price * 0.18),
                             0
                           )}
                         </div>
@@ -386,9 +401,9 @@ function InvoiceModal(props) {
                               <div className="fw-bold ">
                                 {billDetails?.products?.reduce(
                                   (acc, curr) =>
-                                    (acc +=
-                                      curr.qty * curr.price -
-                                      curr.qty * curr.price * 0.18),
+                                  (acc +=
+                                    curr.qty * curr.price -
+                                    curr.qty * curr.price * 0.18),
                                   0
                                 )}
                               </div>
@@ -433,20 +448,20 @@ function InvoiceModal(props) {
                           <div className="fw-bold ">
                             {billDetails?.state == "Maharashtra"
                               ? billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                    (acc += curr.qty * curr.price * 0.09),
-                                  0
-                                ) +
-                                billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                    (acc += curr.qty * curr.price * 0.09),
-                                  0
-                                )
+                                (acc, curr) =>
+                                  (acc += curr.qty * curr.price * 0.09),
+                                0
+                              ) +
+                              billDetails?.products?.reduce(
+                                (acc, curr) =>
+                                  (acc += curr.qty * curr.price * 0.09),
+                                0
+                              )
                               : billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                    (acc += curr.qty * curr.price * 0.18),
-                                  0
-                                )}
+                                (acc, curr) =>
+                                  (acc += curr.qty * curr.price * 0.18),
+                                0
+                              )}
                           </div>
                         </div>
                         <div className="d-flex justify-content-between border border-dark ">
@@ -458,7 +473,7 @@ function InvoiceModal(props) {
                             )}
                           </div>
                         </div>
-                        {props.heading?.includes("INVOICE") && (
+                        {/* {props.heading?.includes("INVOICE") && (
                           <div>
                             <div className="d-flex justify-content-between border border-dark ">
                               <div className="fw-bold">PAID AMOUNT</div>
@@ -476,7 +491,7 @@ function InvoiceModal(props) {
                               </div>
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </td>
                     </tr>
                   ) : (
@@ -501,9 +516,9 @@ function InvoiceModal(props) {
                               <div className="fw-bold ">
                                 {billDetails?.products?.reduce(
                                   (acc, curr) =>
-                                    (acc +=
-                                      curr.qty * curr.price -
-                                      curr.qty * curr.price * 0.18),
+                                  (acc +=
+                                    curr.qty * curr.price -
+                                    curr.qty * curr.price * 0.18),
                                   0
                                 )}
                               </div>
@@ -952,7 +967,7 @@ function InvoiceModal(props) {
             </button>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal >
     </>
   );
 }
