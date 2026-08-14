@@ -22,6 +22,8 @@ const billingSchema = new mongoose.Schema({
   invoice_number: { type: Number },
   date: { type: Date, default: Date.now },
   show_invoice: { type: Boolean, default: true },
+  transporter_name: { type: String },
+  vehicle_number: { type: String },
 });
 
 // invoice_number is now manually entered by the user
