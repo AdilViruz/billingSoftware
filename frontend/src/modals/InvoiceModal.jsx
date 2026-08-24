@@ -31,6 +31,7 @@ function InvoiceModal(props) {
 
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
+    pageStyle: "@page { size: auto; margin: 15mm 10mm 10mm 10mm; }",
     onBeforeGetContent: () => {
       return new Promise((resolve) => {
         promiseResolveRef.current = resolve;
@@ -115,7 +116,7 @@ function InvoiceModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div ref={printRef} className="invoice-container p-3">
+          <div ref={printRef} className="invoice-container p-4 pt-4">
             <div className="d-flex justify-content-between align-items-center">
               <div className="align-self-center w-25 text-center">
                 {branch == "branch-1" ? (
