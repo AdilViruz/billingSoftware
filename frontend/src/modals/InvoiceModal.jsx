@@ -115,37 +115,36 @@ function InvoiceModal(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="invoice-container">
-            <div ref={printRef} className="p-3">
-              <div className="d-flex justify-content-between">
-                <div className="align-self-center w-25">
-                  {branch == "branch-1" ? (
-                    <img src="/images/Alizba_logo.png " alt="" />
-                  ) : (
-                    <img src="/images/logo2.png" alt="" />
-                  )}
-                </div>
-                <div className="text-center seller-info w-50">
-                  <div>{props.heading}</div>
-                  <div className="fw-bold fs-4">
-                    {branch == "branch-1"
-                      ? "ALIZBA WOOD FURNITURE"
-                      : "KSN FURNITURE"}
-                  </div>
-                  <div style={{ fontSize: 14 }}>
-                    H.NO.2465/D/1 EKTA NAGAR, SHIV NAGAR WANJRA LAYOUT,
-                    PILINADI, NAGPUR-440026
-                  </div>
-                  <div className="fw-bold">GSTIN/UIN: 27CJDPM0861R1ZN</div>
-                </div>
-                <div className="align-self-center w-25">
-                  {branch == "branch-1" ? (
-                    <img src="/images/Alizba_logo.png " alt="" />
-                  ) : (
-                    <img src="/images/logo2.png" alt="" />
-                  )}
-                </div>
+          <div ref={printRef} className="invoice-container p-3">
+            <div className="d-flex justify-content-between align-items-center">
+              <div className="align-self-center w-25 text-center">
+                {branch == "branch-1" ? (
+                  <img className="invoice-logo" src="/images/Alizba_logo.png" alt="Logo" />
+                ) : (
+                  <img className="invoice-logo" src="/images/logo2.png" alt="Logo" />
+                )}
               </div>
+              <div className="text-center seller-info w-50">
+                <div>{props.heading}</div>
+                <div className="fw-bold fs-4">
+                  {branch == "branch-1"
+                    ? "ALIZBA WOOD FURNITURE"
+                    : "KSN FURNITURE"}
+                </div>
+                <div style={{ fontSize: 14 }}>
+                  H.NO.2465/D/1 EKTA NAGAR, SHIV NAGAR WANJRA LAYOUT,
+                  PILINADI, NAGPUR-440026
+                </div>
+                <div className="fw-bold">GSTIN/UIN: 27CJDPM0861R1ZN</div>
+              </div>
+              <div className="align-self-center w-25 text-center">
+                {branch == "branch-1" ? (
+                  <img className="invoice-logo" src="/images/Alizba_logo.png" alt="Logo" />
+                ) : (
+                  <img className="invoice-logo" src="/images/logo2.png" alt="Logo" />
+                )}
+              </div>
+            </div>
               <table
                 className={` ${branch == "branch-2"
                   ? "invoice-table invoice-ksn w-100 mt-3"
@@ -965,7 +964,6 @@ function InvoiceModal(props) {
             <button className="btn btn-bg mx-2" onClick={handleShare}>
               Share
             </button>
-          </div>
         </Modal.Body>
       </Modal >
     </>
