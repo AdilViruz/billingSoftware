@@ -326,8 +326,8 @@ function InvoiceModal(props) {
                         <td className="text-end">18%</td>
                       ) : null}
                       <td className="text-end">
-                        {billDetails?.gst_number
-                          ? item.qty * item.price - item.qty * item.price * 0.18
+                        {billDetails?.gst_number || billDetails?.ure_number
+                          ? ((item.qty * item.price) / 1.18).toFixed(2)
                           : item.qty * item.price}
                       </td>
                     </tr>
@@ -360,13 +360,16 @@ function InvoiceModal(props) {
 
                       <td colSpan={4}>
                         <div className="text-end fw-bold">
-                          {billDetails?.products?.reduce(
-                            (acc, curr) =>
-                            (acc +=
-                              curr.qty * curr.price -
-                              curr.qty * curr.price * 0.18),
-                            0
-                          )}
+                          {billDetails?.products
+                            ?.reduce(
+                              (acc, curr) =>
+                                (acc +=
+                                  billDetails?.gst_number || billDetails?.ure_number
+                                    ? (curr.qty * curr.price) / 1.18
+                                    : curr.qty * curr.price),
+                              0
+                            )
+                            .toFixed(2)}
                         </div>
                       </td>
                     </tr>
@@ -399,46 +402,55 @@ function InvoiceModal(props) {
                                 TOTAL AMOUNT BEFORE TAX
                               </div>
                               <div className="fw-bold ">
-                                {billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                  (acc +=
-                                    curr.qty * curr.price -
-                                    curr.qty * curr.price * 0.18),
-                                  0
-                                )}
+                                {billDetails?.products
+                                  ?.reduce(
+                                    (acc, curr) =>
+                                      (acc += (curr.qty * curr.price) / 1.18),
+                                    0
+                                  )
+                                  .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">CGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state == "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">SGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state == "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">IGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state != "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.18),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.18) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                           </div>
@@ -446,31 +458,26 @@ function InvoiceModal(props) {
                         <div className="d-flex justify-content-between border border-dark ">
                           <div className="fw-bold">TOTAL TAX AMOUNT</div>
                           <div className="fw-bold ">
-                            {billDetails?.state == "Maharashtra"
-                              ? billDetails?.products?.reduce(
-                                (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.09),
-                                0
-                              ) +
-                              billDetails?.products?.reduce(
-                                (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.09),
-                                0
-                              )
-                              : billDetails?.products?.reduce(
-                                (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.18),
-                                0
-                              )}
+                            {billDetails?.gst_number || billDetails?.ure_number
+                              ? billDetails?.products
+                                  ?.reduce(
+                                    (acc, curr) =>
+                                      (acc += (curr.qty * curr.price * 0.18) / 1.18),
+                                    0
+                                  )
+                                  .toFixed(2)
+                              : "0.00"}
                           </div>
                         </div>
                         <div className="d-flex justify-content-between border border-dark ">
                           <div className="fw-bold">TOTAL AMOUNT AFTER TAX</div>
                           <div className="fw-bold ">
-                            {billDetails?.products?.reduce(
-                              (acc, curr) => (acc += curr.qty * curr.price),
-                              0
-                            )}
+                            {billDetails?.products
+                              ?.reduce(
+                                (acc, curr) => (acc += curr.qty * curr.price),
+                                0
+                              )
+                              .toFixed(2)}
                           </div>
                         </div>
                         {/* {props.heading?.includes("INVOICE") && (
@@ -501,9 +508,11 @@ function InvoiceModal(props) {
                         <div className="text-center fw-bold">
                           {billDetails &&
                             toWords.convert(
-                              billDetails?.products?.reduce(
-                                (acc, curr) => (acc += curr.qty * curr.price),
-                                0
+                              Math.round(
+                                billDetails?.products?.reduce(
+                                  (acc, curr) => (acc += curr.qty * curr.price),
+                                  0
+                                ) || 0
                               )
                             )}
                         </div>
@@ -514,46 +523,55 @@ function InvoiceModal(props) {
                             <div className="d-flex justify-content-between ">
                               <div className="fw-bold">AMOUNT BEFORE TAX</div>
                               <div className="fw-bold ">
-                                {billDetails?.products?.reduce(
-                                  (acc, curr) =>
-                                  (acc +=
-                                    curr.qty * curr.price -
-                                    curr.qty * curr.price * 0.18),
-                                  0
-                                )}
+                                {billDetails?.products
+                                  ?.reduce(
+                                    (acc, curr) =>
+                                      (acc += (curr.qty * curr.price) / 1.18),
+                                    0
+                                  )
+                                  .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">CGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state == "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">SGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state == "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between">
                               <div className="fw-bold">IGST</div>
                               <div className="fw-bold">
                                 {billDetails?.state != "Maharashtra" &&
-                                  billDetails?.products?.reduce(
-                                    (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.18),
-                                    0
-                                  )}
+                                  billDetails?.products
+                                    ?.reduce(
+                                      (acc, curr) =>
+                                        (acc +=
+                                          (curr.qty * curr.price * 0.18) / 1.18),
+                                      0
+                                    )
+                                    .toFixed(2)}
                               </div>
                             </div>
                           </div>
@@ -561,10 +579,12 @@ function InvoiceModal(props) {
                         <div className="d-flex justify-content-between border border-dark  bg-primary">
                           <div className="fw-bold">GRAND TOTAL</div>
                           <div className="fw-bold ">
-                            {billDetails?.products?.reduce(
-                              (acc, curr) => (acc += curr.qty * curr.price),
-                              0
-                            )}
+                            {billDetails?.products
+                              ?.reduce(
+                                (acc, curr) => (acc += curr.qty * curr.price),
+                                0
+                              )
+                              .toFixed(2)}
                           </div>
                         </div>
                         {props.heading?.includes("INVOICE") && (
@@ -692,9 +712,11 @@ function InvoiceModal(props) {
                           Amount in Words:{" "}
                           {billDetails &&
                             toWords.convert(
-                              billDetails?.products?.reduce(
-                                (acc, curr) => (acc += curr.qty * curr.price),
-                                0
+                              Math.round(
+                                billDetails?.products?.reduce(
+                                  (acc, curr) => (acc += curr.qty * curr.price),
+                                  0
+                                ) || 0
                               )
                             )}
                         </div>
