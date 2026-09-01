@@ -327,7 +327,10 @@ function InvoiceModal(props) {
                       ) : null}
                       <td className="text-end">
                         {billDetails?.gst_number || billDetails?.ure_number
-                          ? ((item.qty * item.price) / 1.18).toFixed(2)
+                          ? (
+                              item.qty * item.price -
+                              item.qty * item.price * 0.18
+                            ).toFixed(2)
                           : item.qty * item.price}
                       </td>
                     </tr>
@@ -365,7 +368,8 @@ function InvoiceModal(props) {
                               (acc, curr) =>
                                 (acc +=
                                   billDetails?.gst_number || billDetails?.ure_number
-                                    ? (curr.qty * curr.price) / 1.18
+                                    ? curr.qty * curr.price -
+                                      curr.qty * curr.price * 0.18
                                     : curr.qty * curr.price),
                               0
                             )
@@ -405,7 +409,9 @@ function InvoiceModal(props) {
                                 {billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += (curr.qty * curr.price) / 1.18),
+                                      (acc +=
+                                        curr.qty * curr.price -
+                                        curr.qty * curr.price * 0.18),
                                     0
                                   )
                                   .toFixed(2)}
@@ -418,8 +424,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.09),
                                       0
                                     )
                                     .toFixed(2)}
@@ -432,8 +437,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.09),
                                       0
                                     )
                                     .toFixed(2)}
@@ -446,8 +450,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.18) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.18),
                                       0
                                     )
                                     .toFixed(2)}
@@ -462,7 +465,7 @@ function InvoiceModal(props) {
                               ? billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += (curr.qty * curr.price * 0.18) / 1.18),
+                                      (acc += curr.qty * curr.price * 0.18),
                                     0
                                   )
                                   .toFixed(2)
@@ -526,7 +529,9 @@ function InvoiceModal(props) {
                                 {billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += (curr.qty * curr.price) / 1.18),
+                                      (acc +=
+                                        curr.qty * curr.price -
+                                        curr.qty * curr.price * 0.18),
                                     0
                                   )
                                   .toFixed(2)}
@@ -539,8 +544,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.09),
                                       0
                                     )
                                     .toFixed(2)}
@@ -553,8 +557,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.09) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.09),
                                       0
                                     )
                                     .toFixed(2)}
@@ -567,8 +570,7 @@ function InvoiceModal(props) {
                                   billDetails?.products
                                     ?.reduce(
                                       (acc, curr) =>
-                                        (acc +=
-                                          (curr.qty * curr.price * 0.18) / 1.18),
+                                        (acc += curr.qty * curr.price * 0.18),
                                       0
                                     )
                                     .toFixed(2)}
