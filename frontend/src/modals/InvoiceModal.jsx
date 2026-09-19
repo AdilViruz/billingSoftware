@@ -327,10 +327,7 @@ function InvoiceModal(props) {
                     ) : null}
                     <td className="text-end">
                       {billDetails?.gst_number || billDetails?.ure_number
-                        ? (
-                          item.qty * item.price -
-                          item.qty * item.price * 0.18
-                        ).toFixed(2)
+                        ? ((item.qty * item.price) / 1.18).toFixed(2)
                         : item.qty * item.price}
                     </td>
                   </tr>
@@ -368,8 +365,7 @@ function InvoiceModal(props) {
                             (acc, curr) =>
                             (acc +=
                               billDetails?.gst_number || billDetails?.ure_number
-                                ? curr.qty * curr.price -
-                                curr.qty * curr.price * 0.18
+                                ? (curr.qty * curr.price) / 1.18
                                 : curr.qty * curr.price),
                             0
                           )
@@ -409,9 +405,7 @@ function InvoiceModal(props) {
                               {billDetails?.products
                                 ?.reduce(
                                   (acc, curr) =>
-                                  (acc +=
-                                    curr.qty * curr.price -
-                                    curr.qty * curr.price * 0.18),
+                                    (acc += (curr.qty * curr.price) / 1.18),
                                   0
                                 )
                                 .toFixed(2)}
@@ -424,7 +418,7 @@ function InvoiceModal(props) {
                                 billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
+                                      (acc += ((curr.qty * curr.price) / 1.18) * 0.09),
                                     0
                                   )
                                   .toFixed(2)}
@@ -437,7 +431,7 @@ function InvoiceModal(props) {
                                 billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.09),
+                                      (acc += ((curr.qty * curr.price) / 1.18) * 0.09),
                                     0
                                   )
                                   .toFixed(2)}
@@ -450,7 +444,7 @@ function InvoiceModal(props) {
                                 billDetails?.products
                                   ?.reduce(
                                     (acc, curr) =>
-                                      (acc += curr.qty * curr.price * 0.18),
+                                      (acc += ((curr.qty * curr.price) / 1.18) * 0.18),
                                     0
                                   )
                                   .toFixed(2)}
@@ -465,7 +459,7 @@ function InvoiceModal(props) {
                             ? billDetails?.products
                               ?.reduce(
                                 (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.18),
+                                  (acc += ((curr.qty * curr.price) / 1.18) * 0.18),
                                 0
                               )
                               .toFixed(2)
@@ -513,7 +507,7 @@ function InvoiceModal(props) {
                           toWords.convert(
                             Math.round(
                               billDetails?.products?.reduce(
-                                (acc, curr) => (acc += curr.qty * curr.price * 0.82 * 1.18),
+                                (acc, curr) => (acc += curr.qty * curr.price),
                                 0
                               ) || 0
                             )
@@ -523,14 +517,14 @@ function InvoiceModal(props) {
                     <td colSpan={4} rowSpan={2} className="align-text-top">
                       {billDetails?.gst_number || billDetails?.ure_number ? (
                         <div>
-                          {/* Amount Before Tax = sum of gross amounts (each = qty × rate × 0.82) */}
+                          {/* Amount Before Tax = sum of gross amounts (each = qty × rate / 1.18) */}
                       <div className="d-flex justify-content-between ">
                         <div className="fw-bold">AMOUNT BEFORE TAX</div>
                         <div className="fw-bold ">
                           {billDetails?.products
                             ?.reduce(
                               (acc, curr) =>
-                                (acc += curr.qty * curr.price * 0.82),
+                                (acc += (curr.qty * curr.price) / 1.18),
                               0
                             )
                             .toFixed(2)}
@@ -544,7 +538,7 @@ function InvoiceModal(props) {
                             billDetails?.products
                               ?.reduce(
                                 (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.82 * 0.09),
+                                  (acc += ((curr.qty * curr.price) / 1.18) * 0.09),
                                 0
                               )
                               .toFixed(2)}
@@ -558,7 +552,7 @@ function InvoiceModal(props) {
                             billDetails?.products
                               ?.reduce(
                                 (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.82 * 0.09),
+                                  (acc += ((curr.qty * curr.price) / 1.18) * 0.09),
                                 0
                               )
                               .toFixed(2)}
@@ -572,7 +566,7 @@ function InvoiceModal(props) {
                             billDetails?.products
                               ?.reduce(
                                 (acc, curr) =>
-                                  (acc += curr.qty * curr.price * 0.82 * 0.18),
+                                  (acc += ((curr.qty * curr.price) / 1.18) * 0.18),
                                 0
                               )
                               .toFixed(2)}
@@ -580,13 +574,13 @@ function InvoiceModal(props) {
                       </div>
                     </div>
                       ) : null}
-                    {/* Grand Total = Amount Before Tax + CGST + SGST = base × 1.18 */}
+                    {/* Grand Total = Amount Before Tax + CGST + SGST = sum(qty * price) */}
                     <div className="d-flex justify-content-between border border-dark  bg-primary">
                       <div className="fw-bold">GRAND TOTAL</div>
                       <div className="fw-bold ">
                         {billDetails?.products
                           ?.reduce(
-                            (acc, curr) => (acc += curr.qty * curr.price * 0.82 * 1.18),
+                            (acc, curr) => (acc += curr.qty * curr.price),
                             0
                           )
                           .toFixed(2)}
@@ -605,7 +599,7 @@ function InvoiceModal(props) {
                           <div className="fw-bold ">
                             {(
                               billDetails?.products?.reduce(
-                                (acc, curr) => (acc += curr.qty * curr.price * 0.82 * 1.18),
+                                (acc, curr) => (acc += curr.qty * curr.price),
                                 0
                               ) - billDetails?.paid_amount
                             ).toFixed(2)}
